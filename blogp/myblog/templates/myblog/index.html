@@ -11,13 +11,13 @@
 <body>
     
     
-    <div class="container text-center">
+    <div class="container text-center ">
         <h1>Blogs</h1>
-    <br>
-    <div class="row">
-    {% for x in blog %}
+        <div class="container boxy text-center"></div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for x in page_obj %}
     <div class="col-sm-4 mb-4">
-    <div class="card" style="width: 18rem;">
+    <div class="card" >
         <img src="{{ x.image.url}}" class="card-img-top" alt="..." style="height:200px; width:auto">
         <div class="card-body">
           <h5 class="card-title">{{ x.title }}</h5>
@@ -31,6 +31,32 @@
     
     </div>
 </div>
+<br>
+<div class="container text-center">
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    {% if page_obj.has_previous %}
+<li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
+<li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+{% endif %}
+
+<li class="page-item"><a class="page-link" href="#">Page {{ page_obj.number }} of {{page_obj.paginator.num_pages }}</a></li>
+
+{% if page_obj.has_next %}
+<li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a></li>
+<li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo</a></li>
+{% endif %}
+</ul>
+</nav>
+</div>
+<style>
+  .boxy{
+  width:100px; height:40px;  
+  border:solid 5px #000;
+  border-color:#E8CB3B transparent transparent transparent;
+  border-radius: 150%/100px 20px 0 0;
+}
+</style>
 
 </body>
 </html>
